@@ -15,3 +15,10 @@ Links:
 * [DDM-REST](https://github.com/rinziv/DDM)
 * [Slides](https://github.com/riccotti/DidacticDataMining/tree/master/slides)
 * [Notebooks](https://github.com/riccotti/DidacticDataMining/tree/master/notebooks)
+
+## Usage
+**didactic_datamining** can be installed as a library from github:
+```
+pip install git+https://github.com/g-fabiani4-unipi/DidacticDataMining
+```
+for usage see the [tutorial](https://github.com/g-fabiani4-unipi/DidacticDataMining/tree/master/tutorial).
