@@ -1,8 +1,4 @@
-from didactic_kmeans import *
-from didactic_apriori import *
-from didactic_classificationtree import *
-from didactic_dbscan import *
-from didactic_hierarchical import *
+import numpy as np
 
 
 def create_dataset(npoints=10, minvalue=0, maxvalue=10):
@@ -45,4 +41,3 @@ def create_transactional_dataset(num_transaction=10, num_items=6, min_len=2, max
 def print_transactions(transactions):
     for transaction in transactions:
         print(transaction)
-

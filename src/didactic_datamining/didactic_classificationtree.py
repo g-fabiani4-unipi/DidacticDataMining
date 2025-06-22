@@ -6,29 +6,8 @@ from IPython.display import Image, display
 from collections import defaultdict
 from fractions import Fraction
 from sklearn.metrics import confusion_matrix
+from didactic_datamining.utils import print_fraction, get_color
 
-
-def print_fraction(f, denominator):
-    if f.denominator == denominator:
-        return f
-    else:
-        k = denominator/f.denominator
-        return '%s/%s' % (f.numerator * k, denominator)
-
-
-def get_color(distribution):
-    ndistr = [1.0 * v / sum(distribution) for v in distribution]
-    maxval = max(ndistr)
-    argmaxval = np.argmax(ndistr)
-    color = '#f7f7f7'
-    if maxval <= 0.5:
-        color = '#f7f7f7'
-    elif 0.5 < maxval <= 0.75:
-        color = '#c2a5cf' if argmaxval < len(ndistr) / 2.0 else '#a6dba0'
-    elif maxval > 0.75:
-        color = '#7b3294' if argmaxval < len(ndistr) / 2.0 else '#008837'
-
-    return color
 
 
 def error_rate(p, d=None):
@@ -143,7 +122,7 @@ edge [fontname=helvetica] ;
         return tp, tn, fp, fn
 
     def print_confusion_matrix(self, val, tp, tn, fp, fn):
-        print('R\P\t|%s\t|%s\t|' % (val[0], val[1]))
+        print('R\\P\t|%s\t|%s\t|' % (val[0], val[1]))
         print('%s\t|%d\t|%d\t|' % (val[0], tn, fp))
         print('%s\t|%d\t|%d\t|' % (val[1], fn, tp))
 
@@ -254,7 +233,7 @@ edge [fontname=helvetica] ;
                         feature_childgain_calculus += calculus
                         key = feature_tmp + feature1 + '&' + feature2
                         feature_childgain[key] = (parentgain - cg, ftype, 2)
-                        dataset_df = dataset_df.drop(feature_tmp, 1)
+                        dataset_df = dataset_df.drop(feature_tmp, axis=1)
                         v1 = print_fraction(parentgain, len(dataset_df))
                         v2 = print_fraction(cg, len(dataset_df))
                         v3 = print_fraction(parentgain - cg, len(dataset_df))
@@ -273,9 +252,9 @@ edge [fontname=helvetica] ;
                     dataset_df[feature_tmp] = np.where(dataset_df[feature] <= thr, feature1, feature2)
                     cg, calculus = self.get_children_gain(dataset_df, feature_tmp, target, fun)
                     feature_childgain_calculus += calculus
-                    key = feature_tmp + str(thr) 
+                    key = feature_tmp + str(thr)
                     feature_childgain[key] = (parentgain - cg, ftype, 2)
-                    dataset_df = dataset_df.drop(feature_tmp, 1)
+                    dataset_df = dataset_df.drop(feature_tmp, axis=1)
                     v1 = print_fraction(parentgain, len(dataset_df))
                     v2 = print_fraction(cg, len(dataset_df))
                     v3 = print_fraction(parentgain - cg, len(dataset_df))
@@ -344,7 +323,7 @@ edge [fontname=helvetica] ;
         for feature in split_indexes:
             subdataset_df = dataset_df.iloc[split_indexes[feature]].copy(deep=True)
             if remove_featuresplit:
-                subdataset_df = subdataset_df.drop(featuresplit, 1)
+                subdataset_df = subdataset_df.drop(featuresplit, axis=1)
             if len(subdataset_df) < self.min_samples_leaf:
                 return None
             feature_subdataset[feature] = subdataset_df
@@ -556,9 +535,9 @@ edge [fontname=helvetica] ;
             feature = tree_nodes[idnode]['feature']
             op = tree_nodes[idnode]['op']
             value = tree_nodes[idnode]['value']
-            record_value = test_df.ix[rowid][feature]
+            record_value = test_df.iloc[rowid, test_df.columns.get_loc(feature)]
             if op == '=':
-                if record_value in value.split('-'):    
+                if record_value in value.split('-'):
                     for nextnode_val in tree_edges[idnode]:
                         if record_value in nextnode_val[1].split('-'):
                             idnode = nextnode_val[0]

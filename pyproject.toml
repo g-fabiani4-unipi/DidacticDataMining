@@ -1,0 +1,21 @@
+[project]
+name = "didactic_datamining"
+version = "0.1.0"
+description = "A library to learn how data mining algorithms work."
+readme = "README.md"
+authors = [
+    { name = "Riccardo Guidotti" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "ipython>=9.3.0",
+    "matplotlib>=3.10.3",
+    "numpy>=2.3.1",
+    "pydotplus>=2.0.2",
+    "scikit-learn>=1.7.0",
+    "scipy>=1.15.3",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

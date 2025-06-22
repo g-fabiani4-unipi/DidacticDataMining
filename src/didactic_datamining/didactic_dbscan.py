@@ -3,12 +3,7 @@ import matplotlib.pyplot as plt
 
 from collections import defaultdict
 from scipy.spatial.distance import pdist, squareform
-
-
-def default_to_regular(d):
-    if isinstance(d, defaultdict):
-        d = {k: default_to_regular(v) for k, v in d.items()}
-    return d
+from didactic_datamining.utils import default_to_regular
 
 
 def plot_dbscan(dataset, maxvalue_x=10, maxvalue_y=10, title=None, radius=1.9,

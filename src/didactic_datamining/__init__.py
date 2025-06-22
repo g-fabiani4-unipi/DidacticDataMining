@@ -1,0 +1,6 @@
+from didactic_datamining.didactic_kmeans import plot_kmeans, DidatticKMeans, euclidean_distance, manhattan_distance
+from didactic_datamining.didactic_apriori import DidatticApriori
+from didactic_datamining.didactic_classificationtree import error_rate, gini, DidatticClassificationTree
+from didactic_datamining.didactic_dbscan import plot_dbscan, DidatticDbscan
+from didactic_datamining.didactic_hierarchical import dist2similarity, plot_base_hierarchy, plot_up_hierarchy, plot_dendogram, DidatticHierarchical
+from didactic_datamining.datasets import create_dataset, print_dataset, create_transactional_dataset, print_transactions
