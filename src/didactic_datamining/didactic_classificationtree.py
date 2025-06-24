@@ -222,7 +222,12 @@ edge [fontname=helvetica] ;
                 cg, calculus = self.get_children_gain(dataset_df, feature, target, fun)
                 feature_childgain_calculus += calculus
                 key = feature + '#' + '&'.join(sorted(values))
-                feature_childgain[key] = (cg, ftype, len(values))
+                feature_childgain[key] = (parentgain - cg, ftype, len(values))
+                v1 = print_fraction(parentgain, len(dataset_df))
+                v2 = print_fraction(cg, len(dataset_df))
+                v3 = print_fraction(parentgain - cg, len(dataset_df))
+                print('\tDelta Gain: %s - %s = %s\n' % (v1, v2, v3))
+                feature_childgain_calculus += '\tDelta Gain: %s - %s = %s\n' % (v1, v2, v3)
                 feature_tmp = feature + '#'
                 for nvalues in range(2, len(values)):
                     for splits in itertools.combinations(values, nvalues):
